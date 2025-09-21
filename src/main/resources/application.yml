@@ -1,0 +1,64 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: kafka-consumer-app
+  
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      group-id: message-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.example.kafkaconsumer.dto"
+        spring.json.type.mapping: "messageDto:com.example.kafkaconsumer.dto.MessageDto"
+      enable-auto-commit: false
+      # auto-commit-interval: 1000ms
+      max-poll-records: 10
+      fetch-max-wait: 500ms
+      
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      batch-size: 16384
+      linger-ms: 1
+      buffer-memory: 33554432
+      
+    listener:
+      ack-mode: manual # batch
+      concurrency: 3
+      poll-timeout: 3000ms
+      
+# Kafka Topic Configuration
+app:
+  kafka:
+    topic:
+      name: my-message-topic
+      partitions: 3
+      replication-factor: 1
+      retry-topic: message-topic-retry
+      dead-letter-topic: message-topic-dlt
+
+# Logging
+logging:
+  level:
+    com.example: DEBUG
+    org.springframework.kafka: INFO
+    org.apache.kafka: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,kafka
+  endpoint:
+    health:
+      show-details: always

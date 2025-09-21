@@ -1,0 +1,8 @@
+Starting a Gradle Daemon, 2 incompatible and 1 stopped Daemons could not be reused, use --status for details
+
+> Task :compileJava
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/nrsenthil/Documents/rnd/kafka4-proj/claude-kafkaconsumer/build/reports/problems/problems-report.html
+1 actionable task: 1 executed
