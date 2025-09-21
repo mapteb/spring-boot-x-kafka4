@@ -1,6 +1,6 @@
 # Spring Boot Integration with Kafka v4
 
-A Spring Boot helloworld style web application that publishes and consumes messages from Kafka v4. The application acts both as a publisher and a consumer. Kafka runs in a docker container.
+A Spring Boot helloworld style web application that publishes and consumes messages from Kafka v4. The application acts both as a publisher and as a consumer. Kafka runs in a docker container.
 
 ## Usage
 
