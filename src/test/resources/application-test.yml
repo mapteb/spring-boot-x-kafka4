@@ -1,0 +1,6 @@
+app:
+  kafka:
+    topic:
+      name: test-message-topic
+      retry-topic: test-message-topic-retry  
+      dead-letter-topic: test-message-topic-dlt
